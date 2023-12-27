@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование информации</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}" />
+</head>
+<body class="container mt-4">
+<h2>Редактирование информации</h2>
+
+<form th:object="${project}" th:action="@{/projects/{id}(id=${project.id})}" method="post" class="mt-4" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label class="form-label">Название:</label>
+        <input type="text" th:field="*{name}" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Описание:</label>
+        <textarea th:field="*{description}" class="form-control" required></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Текущая фотография:</label>
+        <img th:src="@{${project.photoPath}}" alt="Фотография отсутствует" class="img-thumbnail" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-check-label">Удалить фотографию:</label>
+        <input type="checkbox" th:field="*{deletePhoto}" class="form-check-input"/>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Новая фотография:</label>
+        <input type="file" th:field="*{photoFile}" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+</form>
+
+<a th:href="@{/projects}" class="btn btn-secondary mt-3">Вернуться</a>
+</body>
+</html>
